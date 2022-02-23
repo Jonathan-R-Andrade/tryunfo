@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 
 class Card extends React.Component {
@@ -11,7 +11,7 @@ class Card extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
-      cardTrunfo
+      cardTrunfo,
     } = this.props;
 
     return (
@@ -19,8 +19,8 @@ class Card extends React.Component {
         <p data-testid="name-card">{cardName}</p>
         <img
           data-testid="image-card"
-          src={cardImage}
-          alt={cardName}
+          src={ cardImage }
+          alt={ cardName }
         />
         <p data-testid="description-card">{cardDescription}</p>
         <p data-testid="attr1-card">{cardAttr1}</p>
@@ -30,22 +30,22 @@ class Card extends React.Component {
         {
           (cardTrunfo)
             ? <p data-testid="trunfo-card">Super Trunfo</p>
-            : <></>
+            : null
         }
       </div>
-    )
+    );
   }
 }
 
 Card.propTypes = {
-  cardName: PropTypes.string,
-  cardDescription: PropTypes.string,
-  cardAttr1: PropTypes.string,
-  cardAttr2: PropTypes.string,
-  cardAttr3: PropTypes.string,
-  cardImage: PropTypes.string,
-  cardRare: PropTypes.string,
-  cardTrunfo: PropTypes.bool,
+  cardName: PropTypes.string.isRequired,
+  cardDescription: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
+  cardImage: PropTypes.string.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
 };
 
 export default Card;

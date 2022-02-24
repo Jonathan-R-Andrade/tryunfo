@@ -10,10 +10,9 @@ class App extends React.Component {
 
     this.state = {
       cards: [],
-      filterName: '',
-      filterRare: 'todas',
     };
     Object.assign(this.state, this.defaultCard());
+    Object.assign(this.state, this.defaultFilter());
 
     this.handleFields = this.handleFields.bind(this);
     this.hasError = this.hasError.bind(this);
@@ -48,6 +47,14 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
+    };
+  }
+
+  defaultFilter() {
+    return {
+      filterName: '',
+      filterRare: 'todas',
+      filterTrunfo: false,
     };
   }
 
@@ -90,6 +97,7 @@ class App extends React.Component {
     event.preventDefault();
     const { cards } = this.state;
     const newState = this.defaultCard();
+    Object.assign(newState, this.defaultFilter());
     newState.cards = [...cards, this.getCard()];
     this.setState(newState);
   }
@@ -114,9 +122,11 @@ class App extends React.Component {
       cards,
       filterName,
       filterRare,
+      filterTrunfo,
     } = this.state;
 
     const filteredCards = cards.filter((card) => {
+      if (filterTrunfo) return card.cardTrunfo;
       const filterByName = filterName ? card.cardName.includes(filterName) : true;
       const filterByRare = filterRare === 'todas' ? true : card.cardRare === filterRare;
       return filterByName && filterByRare;
@@ -152,8 +162,16 @@ class App extends React.Component {
           />
         </div>
         <div>
-          <Filter onFilterChange={ this.handleFields } />
-          <CardList cards={ filteredCards } onDeleteButtonClick={ this.deleteCard } />
+          <Filter
+            onFilterChange={ this.handleFields }
+            filterName={ filterName }
+            filterRare={ filterRare }
+            filterTrunfo={ filterTrunfo }
+          />
+          <CardList
+            cards={ filteredCards }
+            onDeleteButtonClick={ this.deleteCard }
+          />
         </div>
       </>
     );

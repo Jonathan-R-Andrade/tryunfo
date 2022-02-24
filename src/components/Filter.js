@@ -4,30 +4,18 @@ import Input from './fields/Input';
 import Select from './fields/Select';
 
 class Filter extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      filterName: '',
-      filterRare: 'todas',
-    };
-
-    this.handleFields = this.handleFields.bind(this);
-  }
-
-  handleFields({ target }) {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [target.name]: value });
-  }
-
   render() {
-    const { filterName, filterRare } = this.state;
-    const { onFilterChange } = this.props;
+    const {
+      onFilterChange,
+      filterName,
+      filterRare,
+      filterTrunfo,
+    } = this.props;
 
     return (
       <div className="Filter-container">
         <h3>Filtros de busca</h3>
-        <form className="Filter">
+        <div className="Filter">
           <Input
             label="Nome"
             type="text"
@@ -36,7 +24,6 @@ class Filter extends React.Component {
             value={ filterName }
             dataTestid="name-filter"
             onChange={ (event) => {
-              this.handleFields(event);
               onFilterChange(event);
             } }
           />
@@ -47,7 +34,6 @@ class Filter extends React.Component {
             value={ filterRare }
             dataTestid="rare-filter"
             onChange={ (event) => {
-              this.handleFields(event);
               onFilterChange(event);
             } }
             options={
@@ -59,7 +45,18 @@ class Filter extends React.Component {
               </>
             }
           />
-        </form>
+          <Input
+            label="Super Trunfo"
+            type="checkbox"
+            name="filterTrunfo"
+            id="field-trunfo"
+            checked={ filterTrunfo }
+            dataTestid="trunfo-filter"
+            onChange={ (event) => {
+              onFilterChange(event);
+            } }
+          />
+        </div>
       </div>
     );
   }
@@ -67,6 +64,9 @@ class Filter extends React.Component {
 
 Filter.propTypes = {
   onFilterChange: PropTypes.func.isRequired,
+  filterName: PropTypes.string.isRequired,
+  filterRare: PropTypes.string.isRequired,
+  filterTrunfo: PropTypes.bool.isRequired,
 };
 
 export default Filter;

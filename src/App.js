@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import CardList from './components/CardList';
+import Filter from './components/Filter';
 
 class App extends React.Component {
   constructor() {
@@ -9,6 +10,7 @@ class App extends React.Component {
 
     this.state = this.defaultCard();
     this.state.cards = [];
+    this.state.filterName = '';
 
     this.handleFields = this.handleFields.bind(this);
     this.hasError = this.hasError.bind(this);
@@ -91,11 +93,9 @@ class App extends React.Component {
 
   deleteCard(cardName) {
     const { cards } = this.state;
-    const newState = this.defaultCard();
-    newState.cards = [
-      ...cards.filter((card) => card.cardName !== cardName),
-    ];
-    this.setState(newState);
+    this.setState({
+      cards: [...cards.filter((card) => card.cardName !== cardName)],
+    });
   }
 
   render() {
@@ -109,7 +109,12 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       cards,
+      filterName,
     } = this.state;
+
+    const filteredCards = cards.filter((card) => (
+      filterName ? card.cardName.includes(filterName) : true
+    ));
 
     return (
       <>
@@ -140,7 +145,10 @@ class App extends React.Component {
             showDeleteButton={ false }
           />
         </div>
-        <CardList cards={ cards } onDeleteButtonClick={ this.deleteCard } />
+        <div>
+          <Filter onFilterChange={ this.handleFields } />
+          <CardList cards={ filteredCards } onDeleteButtonClick={ this.deleteCard } />
+        </div>
       </>
     );
   }

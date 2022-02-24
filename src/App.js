@@ -13,6 +13,7 @@ class App extends React.Component {
     this.hasError = this.hasError.bind(this);
     this.save = this.save.bind(this);
     this.getCard = this.getCard.bind(this);
+    this.hasTrunfo = this.hasTrunfo.bind(this);
   }
 
   handleFields({ target }) {
@@ -71,6 +72,11 @@ class App extends React.Component {
     return false;
   }
 
+  hasTrunfo() {
+    const { cards } = this.state;
+    return cards.some((card) => card.cardTrunfo);
+  }
+
   save(event) {
     event.preventDefault();
     const { cards } = this.state;
@@ -101,6 +107,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          hasTrunfo={ this.hasTrunfo() }
           isSaveButtonDisabled={ this.hasError() }
           onInputChange={ this.handleFields }
           onSaveButtonClick={ this.save }

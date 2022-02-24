@@ -6,7 +6,32 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
+    this.state = this.defaultCard();
+    this.state.cards = [];
+
+    this.handleFields = this.handleFields.bind(this);
+    this.hasError = this.hasError.bind(this);
+    this.save = this.save.bind(this);
+    this.getCard = this.getCard.bind(this);
+  }
+
+  handleFields({ target }) {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({ [target.name]: value });
+  }
+
+  getCard() {
+    const cardKeys = Object.keys(this.defaultCard());
+    const card = {};
+    cardKeys.forEach((key) => {
+      const { [key]: cardValue } = this.state;
+      card[key] = cardValue;
+    });
+    return card;
+  }
+
+  defaultCard() {
+    return {
       cardName: '',
       cardDescription: '',
       cardAttr1: '0',
@@ -16,14 +41,6 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
     };
-
-    this.handleFields = this.handleFields.bind(this);
-    this.hasError = this.hasError.bind(this);
-  }
-
-  handleFields({ target }) {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [target.name]: value });
   }
 
   hasError() {
@@ -54,6 +71,13 @@ class App extends React.Component {
     return false;
   }
 
+  save(event) {
+    event.preventDefault();
+    const { cards } = this.state;
+    cards.push(this.getCard());
+    this.setState(this.defaultCard());
+  }
+
   render() {
     const {
       cardName,
@@ -79,6 +103,7 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ this.hasError() }
           onInputChange={ this.handleFields }
+          onSaveButtonClick={ this.save }
         />
         <Card
           cardName={ cardName }

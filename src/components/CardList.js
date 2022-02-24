@@ -4,12 +4,12 @@ import Card from './Card';
 
 class cardList extends React.Component {
   render() {
-    const { cards } = this.props;
+    const { cards, onDeleteButtonClick } = this.props;
 
     return (
       <ul className="cardList">
         {
-          cards.map((card, index) => (
+          cards.map((card) => (
             <Card
               cardName={ card.cardName }
               cardDescription={ card.cardDescription }
@@ -19,7 +19,9 @@ class cardList extends React.Component {
               cardImage={ card.cardImage }
               cardRare={ card.cardRare }
               cardTrunfo={ card.cardTrunfo }
-              key={ index }
+              onDeleteButtonClick={ onDeleteButtonClick }
+              showDeleteButton
+              key={ card.cardName }
             />
           ))
         }
@@ -39,6 +41,7 @@ cardList.propTypes = {
     cardRare: PropTypes.string.isRequired,
     cardTrunfo: PropTypes.bool.isRequired,
   })).isRequired,
+  onDeleteButtonClick: PropTypes.func.isRequired,
 };
 
 export default cardList;

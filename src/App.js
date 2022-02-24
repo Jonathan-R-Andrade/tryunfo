@@ -12,8 +12,9 @@ class App extends React.Component {
 
     this.handleFields = this.handleFields.bind(this);
     this.hasError = this.hasError.bind(this);
-    this.save = this.save.bind(this);
+    this.saveCard = this.saveCard.bind(this);
     this.getCard = this.getCard.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
     this.hasTrunfo = this.hasTrunfo.bind(this);
   }
 
@@ -54,6 +55,7 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
+      cards,
     } = this.state;
 
     const attr1Number = Number(cardAttr1);
@@ -69,6 +71,7 @@ class App extends React.Component {
     if (attr1Number < minAttr || attr1Number > maxAttr) return true;
     if (attr2Number < minAttr || attr2Number > maxAttr) return true;
     if (attr3Number < minAttr || attr3Number > maxAttr) return true;
+    if (cards.some((card) => card.cardName === cardName)) return true;
 
     return false;
   }
@@ -78,11 +81,21 @@ class App extends React.Component {
     return cards.some((card) => card.cardTrunfo);
   }
 
-  save(event) {
+  saveCard(event) {
     event.preventDefault();
     const { cards } = this.state;
-    cards.push(this.getCard());
-    this.setState(this.defaultCard());
+    const newState = this.defaultCard();
+    newState.cards = [...cards, this.getCard()];
+    this.setState(newState);
+  }
+
+  deleteCard(cardName) {
+    const { cards } = this.state;
+    const newState = this.defaultCard();
+    newState.cards = [
+      ...cards.filter((card) => card.cardName !== cardName),
+    ];
+    this.setState(newState);
   }
 
   render() {
@@ -113,7 +126,7 @@ class App extends React.Component {
             hasTrunfo={ this.hasTrunfo() }
             isSaveButtonDisabled={ this.hasError() }
             onInputChange={ this.handleFields }
-            onSaveButtonClick={ this.save }
+            onSaveButtonClick={ this.saveCard }
           />
           <Card
             cardName={ cardName }
@@ -124,9 +137,10 @@ class App extends React.Component {
             cardImage={ cardImage }
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
+            showDeleteButton={ false }
           />
         </div>
-        <CardList cards={ cards } />
+        <CardList cards={ cards } onDeleteButtonClick={ this.deleteCard } />
       </>
     );
   }

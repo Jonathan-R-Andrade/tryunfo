@@ -13,6 +13,8 @@ class Card extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      showDeleteButton,
+      onDeleteButtonClick,
     } = this.props;
 
     return (
@@ -33,10 +35,29 @@ class Card extends React.Component {
             ? <p data-testid="trunfo-card">Super Trunfo</p>
             : null
         }
+        {
+          (showDeleteButton)
+            ? (
+              <button
+                type="button"
+                data-testid="delete-button"
+                onClick={ () => {
+                  onDeleteButtonClick(cardName);
+                } }
+              >
+                Excluir
+              </button>
+            )
+            : null
+        }
       </div>
     );
   }
 }
+
+Card.defaultProps = {
+  onDeleteButtonClick: () => { },
+};
 
 Card.propTypes = {
   cardName: PropTypes.string.isRequired,
@@ -47,6 +68,8 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  showDeleteButton: PropTypes.bool.isRequired,
+  onDeleteButtonClick: PropTypes.func,
 };
 
 export default Card;

@@ -8,9 +8,12 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = this.defaultCard();
-    this.state.cards = [];
-    this.state.filterName = '';
+    this.state = {
+      cards: [],
+      filterName: '',
+      filterRare: 'todas',
+    };
+    Object.assign(this.state, this.defaultCard());
 
     this.handleFields = this.handleFields.bind(this);
     this.hasError = this.hasError.bind(this);
@@ -110,11 +113,14 @@ class App extends React.Component {
       cardTrunfo,
       cards,
       filterName,
+      filterRare,
     } = this.state;
 
-    const filteredCards = cards.filter((card) => (
-      filterName ? card.cardName.includes(filterName) : true
-    ));
+    const filteredCards = cards.filter((card) => {
+      const filterByName = filterName ? card.cardName.includes(filterName) : true;
+      const filterByRare = filterRare === 'todas' ? true : card.cardRare === filterRare;
+      return filterByName && filterByRare;
+    });
 
     return (
       <>

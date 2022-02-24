@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Input from './fields/Input';
+import Select from './fields/Select';
 
 class Filter extends React.Component {
   constructor() {
@@ -8,6 +9,7 @@ class Filter extends React.Component {
 
     this.state = {
       filterName: '',
+      filterRare: 'todas',
     };
 
     this.handleFields = this.handleFields.bind(this);
@@ -19,7 +21,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { filterName } = this.state;
+    const { filterName, filterRare } = this.state;
     const { onFilterChange } = this.props;
 
     return (
@@ -37,6 +39,25 @@ class Filter extends React.Component {
               this.handleFields(event);
               onFilterChange(event);
             } }
+          />
+          <Select
+            label="Raridade"
+            name="filterRare"
+            id="field-filterRare"
+            value={ filterRare }
+            dataTestid="rare-filter"
+            onChange={ (event) => {
+              this.handleFields(event);
+              onFilterChange(event);
+            } }
+            options={
+              <>
+                <option>todas</option>
+                <option>normal</option>
+                <option>raro</option>
+                <option>muito raro</option>
+              </>
+            }
           />
         </form>
       </div>

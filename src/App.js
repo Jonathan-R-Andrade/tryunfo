@@ -20,6 +20,7 @@ class App extends React.Component {
     this.getCard = this.getCard.bind(this);
     this.deleteCard = this.deleteCard.bind(this);
     this.hasTrunfo = this.hasTrunfo.bind(this);
+    this.filterCards = this.filterCards.bind(this);
   }
 
   handleFields({ target }) {
@@ -109,6 +110,24 @@ class App extends React.Component {
     });
   }
 
+  filterCards() {
+    const {
+      cards,
+      filterName,
+      filterRare,
+      filterTrunfo,
+    } = this.state;
+
+    return cards.filter((card) => {
+      const filterByName = filterName
+        ? card.cardName.toLowerCase().includes(filterName.toLowerCase())
+        : true;
+      const filterByRare = filterRare === 'todas' ? true : card.cardRare === filterRare;
+      const filterByTrunfo = filterTrunfo ? card.cardTrunfo : true;
+      return filterByName && filterByRare && filterByTrunfo;
+    });
+  }
+
   render() {
     const {
       cardName,
@@ -119,18 +138,10 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      cards,
       filterName,
       filterRare,
       filterTrunfo,
     } = this.state;
-
-    const filteredCards = cards.filter((card) => {
-      if (filterTrunfo) return card.cardTrunfo;
-      const filterByName = filterName ? card.cardName.includes(filterName) : true;
-      const filterByRare = filterRare === 'todas' ? true : card.cardRare === filterRare;
-      return filterByName && filterByRare;
-    });
 
     return (
       <>
@@ -158,7 +169,6 @@ class App extends React.Component {
             cardImage={ cardImage }
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
-            showDeleteButton={ false }
           />
         </div>
         <div>
@@ -169,7 +179,7 @@ class App extends React.Component {
             filterTrunfo={ filterTrunfo }
           />
           <CardList
-            cards={ filteredCards }
+            cards={ this.filterCards() }
             onDeleteButtonClick={ this.deleteCard }
           />
         </div>

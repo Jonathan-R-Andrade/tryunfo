@@ -56,6 +56,7 @@ class Card extends React.Component {
 }
 
 Card.defaultProps = {
+  showDeleteButton: false,
   onDeleteButtonClick: () => { },
 };
 
@@ -68,7 +69,7 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  showDeleteButton: PropTypes.bool.isRequired,
+  showDeleteButton: PropTypes.bool,
   onDeleteButtonClick: PropTypes.func,
 };
 

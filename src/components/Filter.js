@@ -38,10 +38,10 @@ class Filter extends React.Component {
             } }
             options={
               <>
-                <option>todas</option>
-                <option>normal</option>
-                <option>raro</option>
-                <option>muito raro</option>
+                <option value="todas">Todas</option>
+                <option value="normal">Normal</option>
+                <option value="raro">Raro</option>
+                <option value="muito raro">Muito Raro</option>
               </>
             }
           />

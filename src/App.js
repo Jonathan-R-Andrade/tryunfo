@@ -1,8 +1,9 @@
 import React from 'react';
-import Form from './components/Form';
 import Card from './components/Card';
 import CardList from './components/CardList';
 import Filter from './components/Filter';
+import Form from './components/Form';
+import './css/App.css';
 
 class App extends React.Component {
   constructor() {
@@ -144,34 +145,40 @@ class App extends React.Component {
     } = this.state;
 
     return (
-      <>
-        <div className="addCard">
-          <Form
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-            hasTrunfo={ this.hasTrunfo() }
-            isSaveButtonDisabled={ this.hasError() }
-            onInputChange={ this.handleFields }
-            onSaveButtonClick={ this.saveCard }
-          />
-          <Card
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-          />
-        </div>
-        <div>
+      <div className="App">
+        <section className="App-addCard">
+          <div className="App-addCard-Form">
+            <h2>Adicionar nova carta</h2>
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              hasTrunfo={ this.hasTrunfo() }
+              isSaveButtonDisabled={ this.hasError() }
+              onInputChange={ this.handleFields }
+              onSaveButtonClick={ this.saveCard }
+            />
+          </div>
+          <div className="App-addCard-Card">
+            <h2>Pré-visualização</h2>
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </div>
+        </section>
+        <section className="App-listCard">
           <Filter
             onFilterChange={ this.handleFields }
             filterName={ filterName }
@@ -182,8 +189,8 @@ class App extends React.Component {
             cards={ this.filterCards() }
             onDeleteButtonClick={ this.deleteCard }
           />
-        </div>
-      </>
+        </section>
+      </div>
     );
   }
 }

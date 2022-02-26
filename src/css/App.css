@@ -1,0 +1,21 @@
+.App-addCard {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.App-addCard-Form {
+  background-color: lightgray;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.App-addCard-Card {
+  background-color: rgb(10, 70, 70);
+  color: white;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.App-addCard-Form h2, .App-addCard-Card h2 {
+  text-align: center;
+}

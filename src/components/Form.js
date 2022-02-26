@@ -1,9 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import '../css/Form.css';
 import Input from './fields/Input';
 import Select from './fields/Select';
 import Textarea from './fields/Textarea';
-import '../css/Form.css';
 
 class Form extends React.Component {
   render() {
@@ -25,61 +25,69 @@ class Form extends React.Component {
     return (
       <form className="Form">
         <Input
-          label="Nome"
+          label="Nome:"
           type="text"
           name="cardName"
+          className="Form-cardName"
           id="field-name"
           value={ cardName }
           dataTestid="name-input"
           onChange={ onInputChange }
         />
         <Textarea
-          label="Descrição"
+          label="Descrição:"
           name="cardDescription"
+          className="Form-cardDescription"
           id="field-description"
           value={ cardDescription }
           dataTestid="description-input"
           onChange={ onInputChange }
         />
         <Input
-          label="Atributo 1"
+          label="Atributo 1:"
           type="number"
           name="cardAttr1"
+          className="Form-cardAttr1"
           id="field-attr1"
           value={ cardAttr1 }
           dataTestid="attr1-input"
           onChange={ onInputChange }
         />
         <Input
-          label="Atributo 2"
+          label="Atributo 2:"
           type="number"
           name="cardAttr2"
+          className="Form-cardAttr2"
           id="field-attr2"
           value={ cardAttr2 }
           dataTestid="attr2-input"
           onChange={ onInputChange }
         />
         <Input
-          label="Atributo 3"
+          label="Atributo 3:"
           type="number"
           name="cardAttr3"
+          className="Form-cardAttr3"
           id="field-attr3"
           value={ cardAttr3 }
           dataTestid="attr3-input"
           onChange={ onInputChange }
         />
         <Input
-          label="Imagem"
+          label="Imagem:"
           type="text"
           name="cardImage"
+          className="Form-cardImage"
           id="field-image"
           value={ cardImage }
+          fieldContainer
           dataTestid="image-input"
           onChange={ onInputChange }
         />
         <Select
-          label="Raridade"
+          label="Raridade:"
           name="cardRare"
+          className="Form-cardRare"
           id="field-rare"
           value={ cardRare }
           dataTestid="rare-input"
@@ -98,8 +106,10 @@ class Form extends React.Component {
             : (
               <Input
                 label="Super Trunfo"
+                labelEnd
                 type="checkbox"
                 name="cardTrunfo"
+                className="Form-cardTrunfo"
                 id="field-trunfo"
                 checked={ cardTrunfo }
                 dataTestid="trunfo-input"
@@ -109,6 +119,7 @@ class Form extends React.Component {
         }
         <button
           type="submit"
+          className="Form-btnSubmit"
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }

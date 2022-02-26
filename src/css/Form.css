@@ -2,4 +2,121 @@
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+  margin: 20px auto 10px;
+  max-width: 350px;
+}
+
+.Form .Input, .Form .Textarea, .Form .Select {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px 0;
+  width: 100%;
+}
+
+.Form .Input-label, .Form .Textarea-label, .Form .Select-label {
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.Form .Input-field, .Form .Textarea-field, .Form .Select-field {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  flex-grow: 1;
+  font-size: 16px;
+  min-width: 100px;
+  outline: none;
+  padding: 3px 5px;
+  width: 100px;
+}
+
+.Form-cardDescription .Textarea-field {
+  margin-top: 5px;
+  min-height: 70px;
+  resize: vertical;
+  width: 100%;
+}
+
+.Form-cardImage .Input-field-container {
+  background-color: rgb(10, 70, 70);
+  background-image: url('../icon/outline_add_link.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 5px;
+  flex-grow: 1;
+  min-width: 100px;
+  padding-left: 24px;
+  width: 100px;
+}
+
+.Form .Form-cardTrunfo {
+  width: fit-content;
+}
+
+.Form-cardTrunfo .Input-label {
+  margin: 0 0 0 10px;
+}
+
+.Form-cardTrunfo .Input-field {
+  flex-grow: 0;
+  min-width: 0;
+  width: fit-content;
+}
+
+.Form-cardImage .Input-field-container .Input-field {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.Form-cardImage .Input-field-container:focus-within {
+  outline: 2px solid black;
+}
+
+.Form-cardRare .Select-field {
+  cursor: pointer;
+}
+
+.Form .Input-field:focus, .Form .Textarea-field:focus, .Form .Select-field:focus {
+  outline: 2px solid black;
+}
+
+.Form-cardImage .Input-field-container .Input-field:focus {
+  outline: none;
+}
+
+.Input.Form-cardTrunfo, .Form-cardTrunfo * {
+  cursor: pointer;
+}
+
+.Form-btnSubmit {
+  background-color: blue;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 10px auto;
+  padding: 7px 15px;
+}
+
+.Form-btnSubmit:hover {
+  background-color: darkblue;
+}
+
+.Form-btnSubmit:active {
+  background-color: lightblue;
+}
+
+.Form-btnSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.Form p {
+  font-weight: 500;
+  margin: 8px 0;
 }

@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import Input from './fields/Input';
 import Select from './fields/Select';
 
@@ -49,7 +49,7 @@ class Filter extends React.Component {
             label="Super Trunfo"
             type="checkbox"
             name="filterTrunfo"
-            id="field-trunfo"
+            id="field-filterTrunfo"
             checked={ filterTrunfo }
             dataTestid="trunfo-filter"
             onChange={ (event) => {

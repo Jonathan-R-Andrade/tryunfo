@@ -108,7 +108,7 @@
 }
 
 .Form-btnSubmit:active {
-  background-color: lightblue;
+  background-color: rgb(0, 0, 100);
 }
 
 .Form-btnSubmit:disabled {

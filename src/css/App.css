@@ -10,8 +10,11 @@
 }
 
 .App-addCard-Card {
+  align-items: center;
   background-color: rgb(10, 70, 70);
   color: white;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   padding: 10px;
 }

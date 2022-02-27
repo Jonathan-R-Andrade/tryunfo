@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import '../css/Card.css';
 
 class Card extends React.Component {
@@ -15,48 +15,88 @@ class Card extends React.Component {
       cardTrunfo,
       showDeleteButton,
       onDeleteButtonClick,
+      listContent,
     } = this.props;
 
-    return (
-      <div className="Card">
-        <p data-testid="name-card">{cardName}</p>
-        <img
-          data-testid="image-card"
-          src={ cardImage }
-          alt={ cardName }
-        />
-        <p data-testid="description-card">{cardDescription}</p>
-        <p data-testid="attr1-card">{cardAttr1}</p>
-        <p data-testid="attr2-card">{cardAttr2}</p>
-        <p data-testid="attr3-card">{cardAttr3}</p>
-        <p data-testid="rare-card">{cardRare}</p>
-        {
-          (cardTrunfo)
-            ? <p data-testid="trunfo-card">Super Trunfo</p>
-            : null
-        }
-        {
-          (showDeleteButton)
-            ? (
-              <button
-                type="button"
-                data-testid="delete-button"
-                onClick={ () => {
-                  onDeleteButtonClick(cardName);
-                } }
-              >
-                Excluir
-              </button>
-            )
-            : null
-        }
+    const card = (
+      <div className="Card-container">
+        <div className="Card-content">
+          <p className="Card-name" data-testid="name-card">{cardName}</p>
+          <div className="Card-image-container">
+            <img
+              className="Card-image"
+              data-testid="image-card"
+              src={ cardImage }
+              alt={ cardName }
+            />
+            {
+              (cardTrunfo)
+                ? <p className="Card-trunfo" data-testid="trunfo-card">Super Trunfo</p>
+                : null
+            }
+          </div>
+          <p
+            className="Card-description"
+            data-testid="description-card"
+          >
+            {cardDescription}
+          </p>
+          <p className="Card-attr" data-testid="attr1-card">
+            <span className="Card-attr-label">Atributo 1</span>
+            <span className="Card-attr-value">{cardAttr1}</span>
+          </p>
+          <p className="Card-attr" data-testid="attr2-card">
+            <span className="Card-attr-label">Atributo 2</span>
+            <span className="Card-attr-value">{cardAttr2}</span>
+          </p>
+          <p className="Card-attr" data-testid="attr3-card">
+            <span className="Card-attr-label">Atributo 3</span>
+            <span className="Card-attr-value">{cardAttr3}</span>
+          </p>
+          <p className="Card-rare" data-testid="rare-card">
+            <span className="Card-rare-label">Raridade</span>
+            <span className="Card-rare-value">{cardRare}</span>
+          </p>
+        </div>
       </div>
+    );
+
+    const btnDeleteCard = showDeleteButton
+      ? (
+        <button
+          className="Card-delete"
+          type="button"
+          data-testid="delete-button"
+          onClick={ () => {
+            onDeleteButtonClick(cardName);
+          } }
+        >
+          Excluir
+        </button>
+      )
+      : null;
+
+    return (
+      (listContent)
+        ? (
+          <li className="Card">
+            {card}
+            {btnDeleteCard}
+          </li>
+        )
+        : (
+          <div className="Card">
+            {card}
+            {btnDeleteCard}
+          </div>
+        )
     );
   }
 }
 
 Card.defaultProps = {
   showDeleteButton: false,
+  listContent: false,
   onDeleteButtonClick: () => { },
 };
 
@@ -70,6 +110,7 @@ Card.propTypes = {
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
   showDeleteButton: PropTypes.bool,
+  listContent: PropTypes.bool,
   onDeleteButtonClick: PropTypes.func,
 };
 

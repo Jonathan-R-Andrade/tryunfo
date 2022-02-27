@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import Card from './Card';
 
 class cardList extends React.Component {
@@ -21,6 +21,7 @@ class cardList extends React.Component {
               cardTrunfo={ card.cardTrunfo }
               onDeleteButtonClick={ onDeleteButtonClick }
               showDeleteButton
+              listContent
               key={ card.cardName }
             />
           ))

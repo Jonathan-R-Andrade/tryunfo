@@ -179,16 +179,24 @@ class App extends React.Component {
           </div>
         </section>
         <section className="App-listCard">
-          <Filter
-            onFilterChange={ this.handleFields }
-            filterName={ filterName }
-            filterRare={ filterRare }
-            filterTrunfo={ filterTrunfo }
-          />
-          <CardList
-            cards={ this.filterCards() }
-            onDeleteButtonClick={ this.deleteCard }
-          />
+          <div className="App-listCard-Filter">
+            <div className="App-listCard-Filter-sticky">
+              <h2>Filtros de busca</h2>
+              <Filter
+                onFilterChange={ this.handleFields }
+                filterName={ filterName }
+                filterRare={ filterRare }
+                filterTrunfo={ filterTrunfo }
+              />
+            </div>
+          </div>
+          <div className="App-listCard-CardList">
+            <h2>Suas cartas</h2>
+            <CardList
+              cards={ this.filterCards() }
+              onDeleteButtonClick={ this.deleteCard }
+            />
+          </div>
         </section>
       </div>
     );

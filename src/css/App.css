@@ -1,6 +1,10 @@
-.App-addCard {
+.App-addCard, .App-listCard {
   display: flex;
   flex-wrap: wrap;
+}
+
+.App-addCard h2, .App-listCard h2 {
+  text-align: center;
 }
 
 .App-addCard-Form {
@@ -16,9 +20,30 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  min-width: 0;
   padding: 10px;
+  width: 280px;
 }
 
-.App-addCard-Form h2, .App-addCard-Card h2 {
-  text-align: center;
+.App-listCard {
+  min-height: 100vh;
+}
+
+.App-listCard-Filter {
+  background-color: rgb(230, 230, 230);
+  flex-grow: 1;
+  padding: 10px;
+  width: 300px;
+}
+
+.App-listCard-Filter-sticky {
+  position: sticky;
+  top: 10px;
+}
+
+.App-listCard-CardList {
+  background-color: rgb(10, 70, 70, 0.3);
+  flex-grow: 10;
+  padding: 10px 0;
+  width: 300px;
 }

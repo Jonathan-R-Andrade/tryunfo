@@ -1,0 +1,63 @@
+.Filter {
+  box-sizing: border-box;
+  margin: auto;
+  max-width: 300px;
+  padding: 5px;
+  width: 100%;
+}
+
+.Filter h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.Filter .Input, .Filter .Select {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  width: 100%;
+}
+
+.Filter .Input-label, .Filter .Select-label {
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.Filter .Input-field, .Filter .Select-field {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px black;
+  flex-grow: 1;
+  font-size: 16px;
+  min-width: 100px;
+  outline: none;
+  padding: 3px 5px;
+  width: 100px;
+}
+
+.Filter .Input-field:focus, .Filter .Select-field:focus {
+  outline: 2px solid black;
+}
+
+.Filter .Filter-filterRare .Select-field {
+  cursor: pointer;
+}
+
+.Filter .Filter-filterTrunfo {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.Filter .Filter-filterTrunfo .Input-label {
+  margin: 0;
+}
+
+.Filter .Filter-filterTrunfo .Input-field {
+  cursor: pointer;
+  flex-grow: 0;
+  margin-right: 5px;
+  min-width: 0;
+  width: fit-content;
+}

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../css/Filter.css';
 import Input from './fields/Input';
 import Select from './fields/Select';
 
@@ -13,50 +14,45 @@ class Filter extends React.Component {
     } = this.props;
 
     return (
-      <div className="Filter-container">
-        <h3>Filtros de busca</h3>
-        <div className="Filter">
-          <Input
-            label="Nome"
-            type="text"
-            name="filterName"
-            id="field-filterName"
-            value={ filterName }
-            dataTestid="name-filter"
-            onChange={ (event) => {
-              onFilterChange(event);
-            } }
-          />
-          <Select
-            label="Raridade"
-            name="filterRare"
-            id="field-filterRare"
-            value={ filterRare }
-            dataTestid="rare-filter"
-            onChange={ (event) => {
-              onFilterChange(event);
-            } }
-            options={
-              <>
-                <option value="todas">Todas</option>
-                <option value="normal">Normal</option>
-                <option value="raro">Raro</option>
-                <option value="muito raro">Muito Raro</option>
-              </>
-            }
-          />
-          <Input
-            label="Super Trunfo"
-            type="checkbox"
-            name="filterTrunfo"
-            id="field-filterTrunfo"
-            checked={ filterTrunfo }
-            dataTestid="trunfo-filter"
-            onChange={ (event) => {
-              onFilterChange(event);
-            } }
-          />
-        </div>
+      <div className="Filter">
+        <Input
+          label="Nome:"
+          type="text"
+          name="filterName"
+          id="field-filterName"
+          className="Filter-filterName"
+          value={ filterName }
+          dataTestid="name-filter"
+          onChange={ onFilterChange }
+        />
+        <Select
+          label="Raridade:"
+          name="filterRare"
+          id="field-filterRare"
+          className="Filter-filterRare"
+          value={ filterRare }
+          dataTestid="rare-filter"
+          onChange={ onFilterChange }
+          options={
+            <>
+              <option value="todas">Todas</option>
+              <option value="normal">Normal</option>
+              <option value="raro">Raro</option>
+              <option value="muito raro">Muito Raro</option>
+            </>
+          }
+        />
+        <Input
+          label="Super Trunfo"
+          labelEnd
+          type="checkbox"
+          name="filterTrunfo"
+          id="field-filterTrunfo"
+          className="Filter-filterTrunfo"
+          checked={ filterTrunfo }
+          dataTestid="trunfo-filter"
+          onChange={ onFilterChange }
+        />
       </div>
     );
   }

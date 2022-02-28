@@ -1,6 +1,7 @@
 .Card {
-  margin: 20px;
+  margin: 10px;
   max-width: 240px;
+  min-width: min-content;
   width: 100%;
 }
 
@@ -124,7 +125,7 @@
   cursor: pointer;
   display: block;
   font-weight: 600;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   padding: 7px 15px;
 }
 

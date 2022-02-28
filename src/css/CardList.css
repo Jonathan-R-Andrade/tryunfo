@@ -1,0 +1,13 @@
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+}
+
+.emptyList {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px;
+  text-align: center;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Edit from './components/Edit';
+import './css/App.css';
 
 class App extends React.Component {
   constructor() {
@@ -7,6 +8,7 @@ class App extends React.Component {
 
     this.state = {
       cards: [],
+      play: false,
     };
     Object.assign(this.state, this.defaultCard());
     Object.assign(this.state, this.defaultFilter());
@@ -19,6 +21,7 @@ class App extends React.Component {
     this.hasTrunfo = this.hasTrunfo.bind(this);
     this.filterCards = this.filterCards.bind(this);
     this.cleanFilter = this.cleanFilter.bind(this);
+    this.seeScreenPlay = this.seeScreenPlay.bind(this);
   }
 
   handleFields({ target }) {
@@ -34,6 +37,10 @@ class App extends React.Component {
       card[key] = cardValue;
     });
     return card;
+  }
+
+  seeScreenPlay(see) {
+    this.setState({ play: see });
   }
 
   defaultCard() {
@@ -143,6 +150,7 @@ class App extends React.Component {
       filterName,
       filterRare,
       filterTrunfo,
+      play,
     } = this.state;
 
     const edit = (
@@ -170,7 +178,25 @@ class App extends React.Component {
     );
 
     return (
-      <div className="App">{edit}</div>
+      <div className="App">
+        <div className="App-changeScreen">
+          <button
+            type="button"
+            className="App-changeScreen-btnPlay"
+            onClick={ () => { this.seeScreenPlay(true); } }
+          >
+            Jogar
+          </button>
+          <button
+            type="button"
+            className="App-changeScreen-btnEditSeeCards"
+            onClick={ () => { this.seeScreenPlay(false); } }
+          >
+            Editar/Ver Cartas
+          </button>
+        </div>
+        {play ? <>TESTE</> : edit}
+      </div>
     );
   }
 }

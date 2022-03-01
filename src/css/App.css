@@ -1,0 +1,34 @@
+.App-changeScreen {
+  display: flex;
+}
+
+.App-changeScreen-btnPlay, .App-changeScreen-btnEditSeeCards {
+  border: none;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  flex-basis: 50%;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.App-changeScreen-btnPlay {
+  background-color: green;
+}
+
+.App-changeScreen-btnEditSeeCards {
+  background-color: blue;
+}
+
+.App-changeScreen-btnPlay:active {
+  background-color: darkgreen;
+}
+
+.App-changeScreen-btnEditSeeCards:active {
+  background-color: darkblue;
+}
+
+.App-changeScreen-btnPlay:hover, .App-changeScreen-btnEditSeeCards:hover {
+  box-shadow: inset 0 0 20px black;
+}

@@ -1,9 +1,5 @@
 import React from 'react';
-import Card from './components/Card';
-import CardList from './components/CardList';
-import Filter from './components/Filter';
-import Form from './components/Form';
-import './css/App.css';
+import Edit from './components/Edit';
 
 class App extends React.Component {
   constructor() {
@@ -149,62 +145,32 @@ class App extends React.Component {
       filterTrunfo,
     } = this.state;
 
+    const edit = (
+      <Edit
+        cardName={ cardName }
+        cardDescription={ cardDescription }
+        cardAttr1={ cardAttr1 }
+        cardAttr2={ cardAttr2 }
+        cardAttr3={ cardAttr3 }
+        cardImage={ cardImage }
+        cardRare={ cardRare }
+        cardTrunfo={ cardTrunfo }
+        hasTrunfo={ this.hasTrunfo() }
+        hasError={ this.hasError() }
+        onInputChange={ this.handleFields }
+        onSaveButtonClick={ this.saveCard }
+        onFilterChange={ this.handleFields }
+        filterName={ filterName }
+        filterRare={ filterRare }
+        filterTrunfo={ filterTrunfo }
+        onCleanButtonClick={ this.cleanFilter }
+        cards={ this.filterCards() }
+        onDeleteButtonClick={ this.deleteCard }
+      />
+    );
+
     return (
-      <div className="App">
-        <section className="App-addCard">
-          <div className="App-addCard-Form">
-            <h2>Adicionar nova carta</h2>
-            <Form
-              cardName={ cardName }
-              cardDescription={ cardDescription }
-              cardAttr1={ cardAttr1 }
-              cardAttr2={ cardAttr2 }
-              cardAttr3={ cardAttr3 }
-              cardImage={ cardImage }
-              cardRare={ cardRare }
-              cardTrunfo={ cardTrunfo }
-              hasTrunfo={ this.hasTrunfo() }
-              isSaveButtonDisabled={ this.hasError() }
-              onInputChange={ this.handleFields }
-              onSaveButtonClick={ this.saveCard }
-            />
-          </div>
-          <div className="App-addCard-Card">
-            <h2>Pré-visualização</h2>
-            <Card
-              cardName={ cardName }
-              cardDescription={ cardDescription }
-              cardAttr1={ cardAttr1 }
-              cardAttr2={ cardAttr2 }
-              cardAttr3={ cardAttr3 }
-              cardImage={ cardImage }
-              cardRare={ cardRare }
-              cardTrunfo={ cardTrunfo }
-            />
-          </div>
-        </section>
-        <section className="App-listCard">
-          <div className="App-listCard-Filter">
-            <div className="App-listCard-Filter-sticky">
-              <h2>Filtros de busca</h2>
-              <Filter
-                onFilterChange={ this.handleFields }
-                filterName={ filterName }
-                filterRare={ filterRare }
-                filterTrunfo={ filterTrunfo }
-                onCleanButtonClick={ this.cleanFilter }
-              />
-            </div>
-          </div>
-          <div className="App-listCard-CardList">
-            <h2>Suas cartas</h2>
-            <CardList
-              cards={ this.filterCards() }
-              onDeleteButtonClick={ this.deleteCard }
-            />
-          </div>
-        </section>
-      </div>
+      <div className="App">{edit}</div>
     );
   }
 }

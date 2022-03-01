@@ -1,19 +1,19 @@
-.App-addCard, .App-listCard {
+.Edit-addCard, .Edit-listCard {
   display: flex;
   flex-wrap: wrap;
 }
 
-.App-addCard h2, .App-listCard h2 {
+.Edit-addCard h2, .Edit-listCard h2 {
   text-align: center;
 }
 
-.App-addCard-Form {
+.Edit-addCard-Form {
   background-color: lightgray;
   flex-grow: 1;
   padding: 10px;
 }
 
-.App-addCard-Card {
+.Edit-addCard-Card {
   align-items: center;
   background-color: rgb(10, 70, 70);
   color: white;
@@ -25,23 +25,23 @@
   width: 280px;
 }
 
-.App-listCard {
+.Edit-listCard {
   min-height: 100vh;
 }
 
-.App-listCard-Filter {
+.Edit-listCard-Filter {
   background-color: rgb(230, 230, 230);
   flex-grow: 1;
   padding: 10px;
   width: 300px;
 }
 
-.App-listCard-Filter-sticky {
+.Edit-listCard-Filter-sticky {
   position: sticky;
   top: 10px;
 }
 
-.App-listCard-CardList {
+.Edit-listCard-CardList {
   background-color: rgb(10, 70, 70, 0.3);
   flex-grow: 10;
   padding: 10px 0;

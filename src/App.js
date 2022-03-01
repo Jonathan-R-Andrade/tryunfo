@@ -22,6 +22,7 @@ class App extends React.Component {
     this.deleteCard = this.deleteCard.bind(this);
     this.hasTrunfo = this.hasTrunfo.bind(this);
     this.filterCards = this.filterCards.bind(this);
+    this.cleanFilter = this.cleanFilter.bind(this);
   }
 
   handleFields({ target }) {
@@ -58,6 +59,10 @@ class App extends React.Component {
       filterRare: 'todas',
       filterTrunfo: false,
     };
+  }
+
+  cleanFilter() {
+    this.setState(this.defaultFilter());
   }
 
   hasError() {
@@ -187,6 +192,7 @@ class App extends React.Component {
                 filterName={ filterName }
                 filterRare={ filterRare }
                 filterTrunfo={ filterTrunfo }
+                onCleanButtonClick={ this.cleanFilter }
               />
             </div>
           </div>

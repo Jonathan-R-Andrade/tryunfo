@@ -11,6 +11,7 @@ class Filter extends React.Component {
       filterName,
       filterRare,
       filterTrunfo,
+      onCleanButtonClick,
     } = this.props;
 
     return (
@@ -53,6 +54,13 @@ class Filter extends React.Component {
           dataTestid="trunfo-filter"
           onChange={ onFilterChange }
         />
+        <button
+          type="button"
+          className="Filter-btnClean"
+          onClick={ onCleanButtonClick }
+        >
+          Limpar
+        </button>
       </div>
     );
   }
@@ -63,6 +71,7 @@ Filter.propTypes = {
   filterName: PropTypes.string.isRequired,
   filterRare: PropTypes.string.isRequired,
   filterTrunfo: PropTypes.bool.isRequired,
+  onCleanButtonClick: PropTypes.func.isRequired,
 };
 
 export default Filter;

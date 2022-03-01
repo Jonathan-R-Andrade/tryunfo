@@ -61,3 +61,23 @@
   min-width: 0;
   width: fit-content;
 }
+
+.Filter-btnClean {
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  margin: 10px auto 0;
+  padding: 7px 15px;
+}
+
+.Filter-btnClean:hover {
+  background-color: rgb(190, 0, 0);
+}
+
+.Filter-btnClean:active {
+  opacity: 0.7;
+}

@@ -16,9 +16,10 @@ class Card extends React.Component {
       showDeleteButton,
       onDeleteButtonClick,
       listContent,
+      back,
     } = this.props;
 
-    const card = (
+    const cardFront = (
       <div className="Card-container">
         <div className="Card-content">
           <p className="Card-name" data-testid="name-card">{cardName}</p>
@@ -61,6 +62,14 @@ class Card extends React.Component {
       </div>
     );
 
+    const cardBack = (
+      <div className="Card-container">
+        <div className="Card-content">
+          <p>Tryunfo</p>
+        </div>
+      </div>
+    );
+
     const btnDeleteCard = showDeleteButton
       ? (
         <button
@@ -80,13 +89,13 @@ class Card extends React.Component {
       (listContent)
         ? (
           <li className="Card">
-            {card}
+            {back ? cardBack : cardFront}
             {btnDeleteCard}
           </li>
         )
         : (
           <div className="Card">
-            {card}
+            {back ? cardBack : cardFront}
             {btnDeleteCard}
           </div>
         )
@@ -97,6 +106,7 @@ class Card extends React.Component {
 Card.defaultProps = {
   showDeleteButton: false,
   listContent: false,
+  back: false,
   onDeleteButtonClick: () => { },
 };
 
@@ -112,6 +122,7 @@ Card.propTypes = {
   showDeleteButton: PropTypes.bool,
   listContent: PropTypes.bool,
   onDeleteButtonClick: PropTypes.func,
+  back: PropTypes.bool,
 };
 
 export default Card;

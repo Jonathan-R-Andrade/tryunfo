@@ -18,7 +18,7 @@
   border: 2px solid black;
   border-radius: 7px;
   box-sizing: border-box;
-  min-height: 300px;
+  min-height: 417px;
   padding: 7px;
 }
 
@@ -38,7 +38,7 @@
   border-left: 5px solid rgb(10, 70, 70);
   border-right: 5px solid rgb(10, 70, 70);
   box-sizing: border-box;
-  height: 150px;
+  min-height: 150px;
   position: relative;
   width: 100%;
 }

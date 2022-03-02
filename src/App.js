@@ -1,5 +1,6 @@
 import React from 'react';
 import Edit from './components/Edit';
+import Play from './components/Play';
 import './css/App.css';
 
 class App extends React.Component {
@@ -9,6 +10,8 @@ class App extends React.Component {
     this.state = {
       cards: [],
       play: false,
+      shuffledCards: [],
+      currentCard: 0,
     };
     Object.assign(this.state, this.defaultCard());
     Object.assign(this.state, this.defaultFilter());
@@ -22,6 +25,7 @@ class App extends React.Component {
     this.filterCards = this.filterCards.bind(this);
     this.cleanFilter = this.cleanFilter.bind(this);
     this.seeScreenPlay = this.seeScreenPlay.bind(this);
+    this.shuffleCards = this.shuffleCards.bind(this);
   }
 
   handleFields({ target }) {
@@ -37,6 +41,15 @@ class App extends React.Component {
       card[key] = cardValue;
     });
     return card;
+  }
+
+  shuffleCards() {
+    const { cards } = this.state;
+    const shuffledCards = [...cards].sort(() => {
+      const subtract = 0.5;
+      return Math.random() - subtract;
+    });
+    this.setState({ shuffledCards, currentCard: 0 });
   }
 
   seeScreenPlay(see) {
@@ -151,9 +164,11 @@ class App extends React.Component {
       filterRare,
       filterTrunfo,
       play,
+      shuffledCards,
+      currentCard,
     } = this.state;
 
-    const edit = (
+    const editComponent = (
       <Edit
         cardName={ cardName }
         cardDescription={ cardDescription }
@@ -177,6 +192,14 @@ class App extends React.Component {
       />
     );
 
+    const playComponent = (
+      <Play
+        shuffledCards={ shuffledCards }
+        currentCard={ currentCard }
+        shuffleCards={ this.shuffleCards }
+      />
+    );
+
     return (
       <div className="App">
         <div className="App-changeScreen">
@@ -195,7 +218,7 @@ class App extends React.Component {
             Editar/Ver Cartas
           </button>
         </div>
-        {play ? <>TESTE</> : edit}
+        {play ? playComponent : editComponent}
       </div>
     );
   }

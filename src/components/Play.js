@@ -9,9 +9,13 @@ class Play extends React.Component {
       shuffledCards,
       currentCard,
       shuffleCards,
+      nextCard,
     } = this.props;
 
-    const cardFront = shuffledCards.length > 0
+    let remainingCards = (shuffledCards.length - currentCard) - 1;
+    remainingCards = remainingCards < 0 ? 0 : remainingCards;
+
+    const cardFront = currentCard < shuffledCards.length && currentCard >= 0
       ? (
         <Card
           cardName={ shuffledCards[currentCard].cardName }
@@ -27,40 +31,76 @@ class Play extends React.Component {
       : null;
 
     const cardBack = (
-      <Card
-        cardName=""
-        cardDescription=""
-        cardAttr1=""
-        cardAttr2=""
-        cardAttr3=""
-        cardImage=""
-        cardRare=""
-        cardTrunfo={ false }
-        back
-      />
+      remainingCards > 0
+        ? (
+          <Card
+            cardName=""
+            cardDescription=""
+            cardAttr1=""
+            cardAttr2=""
+            cardAttr3=""
+            cardImage=""
+            cardRare=""
+            cardTrunfo={ false }
+            back
+          />
+        )
+        : null
     );
 
-    return (
-      <div className="Play">
+    const btnNext = (
+      remainingCards > 0
+        ? (
+          <button
+            type="button"
+            className="Play-btnNextCard"
+            onClick={ () => { nextCard(); } }
+          >
+            {'Próxima Carta >'}
+          </button>
+        )
+        : null
+    );
+
+    const play = (
+      <>
         <div className="Play-cards">
-          {cardFront}
-          {cardBack}
+          <div className="Play-cards-current">
+            {cardFront}
+            {btnNext}
+          </div>
+          <div className="Play-cards-next">
+            {cardBack}
+            <p className="Play-remainingCards">{`Cartas Restantes: ${remainingCards}`}</p>
+          </div>
         </div>
         <button
           type="button"
+          className="Play-btnShuffleCards"
           onClick={ () => { shuffleCards(); } }
         >
           Embaralhar
         </button>
+      </>
+    );
+
+    return (
+      <div className="Play">
+        {
+          shuffledCards.length > 0
+            ? play
+            : <p className="Play-warnerNoCards">Adicione novas cartas para jogar</p>
+        }
       </div>
     );
   }
 }
 
 Play.propTypes = {
-  shuffleCards: PropTypes.func.isRequired,
-  currentCard: PropTypes.number.isRequired,
   shuffledCards: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentCard: PropTypes.number.isRequired,
+  shuffleCards: PropTypes.func.isRequired,
+  nextCard: PropTypes.func.isRequired,
 };
 
 export default Play;

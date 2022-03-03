@@ -11,7 +11,8 @@ class App extends React.Component {
       cards: [],
       play: false,
       shuffledCards: [],
-      currentCard: 0,
+      currentCard: -1,
+      hasCardsChange: false,
     };
     Object.assign(this.state, this.defaultCard());
     Object.assign(this.state, this.defaultFilter());
@@ -26,6 +27,7 @@ class App extends React.Component {
     this.cleanFilter = this.cleanFilter.bind(this);
     this.seeScreenPlay = this.seeScreenPlay.bind(this);
     this.shuffleCards = this.shuffleCards.bind(this);
+    this.nextCard = this.nextCard.bind(this);
   }
 
   handleFields({ target }) {
@@ -49,7 +51,14 @@ class App extends React.Component {
       const subtract = 0.5;
       return Math.random() - subtract;
     });
-    this.setState({ shuffledCards, currentCard: 0 });
+    this.setState({ shuffledCards, currentCard: -1 });
+  }
+
+  nextCard() {
+    this.setState((state) => {
+      const { currentCard } = state;
+      return { currentCard: currentCard + 1 };
+    });
   }
 
   seeScreenPlay(see) {
@@ -122,6 +131,7 @@ class App extends React.Component {
     const newState = this.defaultCard();
     Object.assign(newState, this.defaultFilter());
     newState.cards = [...cards, this.getCard()];
+    newState.hasCardsChange = true;
     this.setState(newState);
   }
 
@@ -129,6 +139,7 @@ class App extends React.Component {
     const { cards } = this.state;
     this.setState({
       cards: [...cards.filter((card) => card.cardName !== cardName)],
+      hasCardsChange: true,
     });
   }
 
@@ -166,6 +177,7 @@ class App extends React.Component {
       play,
       shuffledCards,
       currentCard,
+      cards,
     } = this.state;
 
     const editComponent = (
@@ -197,6 +209,7 @@ class App extends React.Component {
         shuffledCards={ shuffledCards }
         currentCard={ currentCard }
         shuffleCards={ this.shuffleCards }
+        nextCard={ this.nextCard }
       />
     );
 
@@ -206,7 +219,14 @@ class App extends React.Component {
           <button
             type="button"
             className="App-changeScreen-btnPlay"
-            onClick={ () => { this.seeScreenPlay(true); } }
+            onClick={ () => {
+              this.seeScreenPlay(true);
+              const { hasCardsChange } = this.state;
+              if (cards.length !== shuffledCards.length || hasCardsChange) {
+                this.shuffleCards();
+                this.setState({ hasCardsChange: false });
+              }
+            } }
           >
             Jogar
           </button>

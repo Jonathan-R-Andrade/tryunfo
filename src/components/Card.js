@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import '../css/Card.css';
+import TryunfoLogo from './TryunfoLogo';
 
 class Card extends React.Component {
   render() {
@@ -65,7 +66,7 @@ class Card extends React.Component {
     const cardBack = (
       <div className="Card-container">
         <div className="Card-content">
-          <p>Tryunfo</p>
+          <TryunfoLogo />
         </div>
       </div>
     );

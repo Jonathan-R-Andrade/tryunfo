@@ -1,21 +1,26 @@
+:root {
+
+  --TryunfoLogo-size: 215px;
+}
+
 .TryunfoLogo {
   align-items: center;
-  border: 1px solid white;
+  border: calc(var(--TryunfoLogo-size) * 0.01) solid white;
   border-radius: 50%;
   box-sizing: border-box;
   display: flex;
-  height: 220px;
+  height: var(--TryunfoLogo-size);
   justify-content: center;
   margin: auto;
-  max-width: 220px;
-  padding: 5px;
+  max-width: var(--TryunfoLogo-size);
+  padding: calc(var(--TryunfoLogo-size) * 0.025);
   width: 100%;
 }
 
 .TryunfoLogo-innerBorder {
   align-items: center;
   background-color: rgb(30, 70, 10);
-  border: 15px solid green;
+  border: calc(var(--TryunfoLogo-size) * 0.07) solid green;
   border-radius: 50%;
   box-sizing: border-box;
   display: flex;
@@ -26,11 +31,11 @@
 }
 
 .TryunfoLogo-text {
-  font-size: 42px;
+  font-size: calc(var(--TryunfoLogo-size) * 0.18);
   font-weight: 600;
   transform: rotateZ(-15deg);
 }
 
 .TryunfoLogo-text-unfo {
-  border-bottom: 3px solid green;
+  border-bottom: calc(var(--TryunfoLogo-size) * 0.015) solid green;
 }

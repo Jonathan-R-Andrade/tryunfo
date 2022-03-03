@@ -4,10 +4,10 @@
   border-radius: 50%;
   box-sizing: border-box;
   display: flex;
-  height: 200px;
+  height: 220px;
   justify-content: center;
   margin: auto;
-  max-width: 200px;
+  max-width: 220px;
   padding: 5px;
   width: 100%;
 }
@@ -26,7 +26,7 @@
 }
 
 .TryunfoLogo-text {
-  font-size: 38px;
+  font-size: 42px;
   font-weight: 600;
   transform: rotateZ(-15deg);
 }

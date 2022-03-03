@@ -9,7 +9,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 10px;
   width: 100%;
 }
 
@@ -18,8 +17,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 260px;
-  min-height: 479px;
+  max-width: 280px;
+  min-height: 512px;
   width: 100%;
 }
 
@@ -54,6 +53,7 @@
   font-weight: 600;
   margin: auto auto 0;
   padding: 7px 15px;
+  text-align: center;
 }
 
 .Play-warnerNoCards {

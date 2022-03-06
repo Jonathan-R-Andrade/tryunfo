@@ -1,8 +1,8 @@
-.App-changeScreen {
+.Header {
   display: flex;
 }
 
-.App-changeScreen-btnPlay, .App-changeScreen-btnEditSeeCards {
+.Header-btnPlay, .Header-btnEditCards {
   border: none;
   box-sizing: border-box;
   color: white;
@@ -13,22 +13,22 @@
   padding: 10px;
 }
 
-.App-changeScreen-btnPlay {
+.Header-btnPlay {
   background-color: green;
 }
 
-.App-changeScreen-btnEditSeeCards {
+.Header-btnEditCards {
   background-color: blue;
 }
 
-.App-changeScreen-btnPlay:active {
+.Header-btnPlay:active {
   background-color: darkgreen;
 }
 
-.App-changeScreen-btnEditSeeCards:active {
+.Header-btnEditCards:active {
   background-color: darkblue;
 }
 
-.App-changeScreen-btnPlay:hover, .App-changeScreen-btnEditSeeCards:hover {
+.Header-btnPlay:hover, .Header-btnEditCards:hover {
   box-shadow: inset 0 0 20px black;
 }

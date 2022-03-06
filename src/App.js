@@ -1,7 +1,7 @@
 import React from 'react';
 import Edit from './components/Edit';
+import Header from './components/Header';
 import Play from './components/Play';
-import './css/App.css';
 
 class App extends React.Component {
   constructor() {
@@ -9,33 +9,21 @@ class App extends React.Component {
 
     this.state = {
       cards: [],
-      play: false,
+      gameScreen: false,
       shuffledCards: [],
       currentCard: -1,
       hasCardsChange: false,
     };
     Object.assign(this.state, this.defaultCard());
     Object.assign(this.state, this.defaultFilter());
-
-    this.handleFields = this.handleFields.bind(this);
-    this.hasError = this.hasError.bind(this);
-    this.saveCard = this.saveCard.bind(this);
-    this.getCard = this.getCard.bind(this);
-    this.deleteCard = this.deleteCard.bind(this);
-    this.hasTrunfo = this.hasTrunfo.bind(this);
-    this.filterCards = this.filterCards.bind(this);
-    this.cleanFilter = this.cleanFilter.bind(this);
-    this.seeScreenPlay = this.seeScreenPlay.bind(this);
-    this.shuffleCards = this.shuffleCards.bind(this);
-    this.nextCard = this.nextCard.bind(this);
   }
 
-  handleFields({ target }) {
+  handleFields = ({ target }) => {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({ [target.name]: value });
   }
 
-  getCard() {
+  getCard = () => {
     const cardKeys = Object.keys(this.defaultCard());
     const card = {};
     cardKeys.forEach((key) => {
@@ -45,52 +33,39 @@ class App extends React.Component {
     return card;
   }
 
-  shuffleCards() {
+  shuffleCards = () => {
     const { cards } = this.state;
     const shuffledCards = [...cards].sort(() => {
       const subtract = 0.5;
       return Math.random() - subtract;
     });
-    this.setState({ shuffledCards, currentCard: -1 });
+    this.setState({
+      shuffledCards,
+      currentCard: -1,
+      hasCardsChange: false,
+    });
   }
 
-  nextCard() {
+  nextCard = () => {
     this.setState((state) => {
       const { currentCard } = state;
       return { currentCard: currentCard + 1 };
     });
   }
 
-  seeScreenPlay(see) {
-    this.setState({ play: see });
+  toggleScreen = (gameScreen) => {
+    const { hasCardsChange } = this.state;
+    if (gameScreen && hasCardsChange) {
+      this.shuffleCards();
+    }
+    this.setState({ gameScreen });
   }
 
-  defaultCard() {
-    return {
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: '0',
-      cardAttr2: '0',
-      cardAttr3: '0',
-      cardImage: '',
-      cardRare: 'normal',
-      cardTrunfo: false,
-    };
-  }
-
-  defaultFilter() {
-    return {
-      filterName: '',
-      filterRare: 'todas',
-      filterTrunfo: false,
-    };
-  }
-
-  cleanFilter() {
+  cleanFilter = () => {
     this.setState(this.defaultFilter());
   }
 
-  hasError() {
+  hasError = () => {
     const {
       cardName,
       cardDescription,
@@ -120,12 +95,12 @@ class App extends React.Component {
     return false;
   }
 
-  hasTrunfo() {
+  hasTrunfo = () => {
     const { cards } = this.state;
     return cards.some((card) => card.cardTrunfo);
   }
 
-  saveCard(event) {
+  saveCard = (event) => {
     event.preventDefault();
     const { cards } = this.state;
     const newState = this.defaultCard();
@@ -135,7 +110,7 @@ class App extends React.Component {
     this.setState(newState);
   }
 
-  deleteCard(cardName) {
+  deleteCard = (cardName) => {
     const { cards } = this.state;
     this.setState({
       cards: [...cards.filter((card) => card.cardName !== cardName)],
@@ -143,7 +118,7 @@ class App extends React.Component {
     });
   }
 
-  filterCards() {
+  filterCards = () => {
     const {
       cards,
       filterName,
@@ -161,6 +136,27 @@ class App extends React.Component {
     });
   }
 
+  defaultCard() {
+    return {
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+    };
+  }
+
+  defaultFilter() {
+    return {
+      filterName: '',
+      filterRare: 'todas',
+      filterTrunfo: false,
+    };
+  }
+
   render() {
     const {
       cardName,
@@ -174,10 +170,9 @@ class App extends React.Component {
       filterName,
       filterRare,
       filterTrunfo,
-      play,
+      gameScreen,
       shuffledCards,
       currentCard,
-      cards,
     } = this.state;
 
     const editComponent = (
@@ -215,30 +210,8 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div className="App-changeScreen">
-          <button
-            type="button"
-            className="App-changeScreen-btnPlay"
-            onClick={ () => {
-              this.seeScreenPlay(true);
-              const { hasCardsChange } = this.state;
-              if (cards.length !== shuffledCards.length || hasCardsChange) {
-                this.shuffleCards();
-                this.setState({ hasCardsChange: false });
-              }
-            } }
-          >
-            Jogar
-          </button>
-          <button
-            type="button"
-            className="App-changeScreen-btnEditSeeCards"
-            onClick={ () => { this.seeScreenPlay(false); } }
-          >
-            Editar/Ver Cartas
-          </button>
-        </div>
-        {play ? playComponent : editComponent}
+        <Header toggleScreen={ this.toggleScreen } />
+        {gameScreen ? playComponent : editComponent}
       </div>
     );
   }

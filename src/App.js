@@ -14,23 +14,6 @@ class App extends React.Component {
       currentCard: -1,
       hasCardsChange: false,
     };
-    Object.assign(this.state, this.defaultCard());
-    Object.assign(this.state, this.defaultFilter());
-  }
-
-  handleFields = ({ target }) => {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [target.name]: value });
-  }
-
-  getCard = () => {
-    const cardKeys = Object.keys(this.defaultCard());
-    const card = {};
-    cardKeys.forEach((key) => {
-      const { [key]: cardValue } = this.state;
-      card[key] = cardValue;
-    });
-    return card;
   }
 
   shuffleCards = () => {
@@ -61,115 +44,25 @@ class App extends React.Component {
     this.setState({ gameScreen });
   }
 
-  cleanFilter = () => {
-    this.setState(this.defaultFilter());
-  }
-
-  hasError = () => {
-    const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cards,
-    } = this.state;
-
-    const attr1Number = Number(cardAttr1);
-    const attr2Number = Number(cardAttr2);
-    const attr3Number = Number(cardAttr3);
-    const sumOfAttr = attr1Number + attr2Number + attr3Number;
-    const maxSumOfAttr = 210;
-    const minAttr = 0;
-    const maxAttr = 90;
-
-    if (!cardName || !cardDescription || !cardImage || !cardRare) return true;
-    if ((sumOfAttr > maxSumOfAttr)) return true;
-    if (attr1Number < minAttr || attr1Number > maxAttr) return true;
-    if (attr2Number < minAttr || attr2Number > maxAttr) return true;
-    if (attr3Number < minAttr || attr3Number > maxAttr) return true;
-    if (cards.some((card) => card.cardName === cardName)) return true;
-
-    return false;
-  }
-
-  hasTrunfo = () => {
+  addCard = (card) => {
     const { cards } = this.state;
-    return cards.some((card) => card.cardTrunfo);
-  }
-
-  saveCard = (event) => {
-    event.preventDefault();
-    const { cards } = this.state;
-    const newState = this.defaultCard();
-    Object.assign(newState, this.defaultFilter());
-    newState.cards = [...cards, this.getCard()];
-    newState.hasCardsChange = true;
-    this.setState(newState);
+    this.setState({
+      cards: [...cards, card],
+      hasCardsChange: true,
+    });
   }
 
   deleteCard = (cardName) => {
     const { cards } = this.state;
     this.setState({
-      cards: [...cards.filter((card) => card.cardName !== cardName)],
+      cards: cards.filter((card) => card.cardName !== cardName),
       hasCardsChange: true,
     });
   }
 
-  filterCards = () => {
-    const {
-      cards,
-      filterName,
-      filterRare,
-      filterTrunfo,
-    } = this.state;
-
-    return cards.filter((card) => {
-      const filterByName = filterName
-        ? card.cardName.toLowerCase().includes(filterName.toLowerCase())
-        : true;
-      const filterByRare = filterRare === 'todas' ? true : card.cardRare === filterRare;
-      const filterByTrunfo = filterTrunfo ? card.cardTrunfo : true;
-      return filterByName && filterByRare && filterByTrunfo;
-    });
-  }
-
-  defaultCard() {
-    return {
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: '0',
-      cardAttr2: '0',
-      cardAttr3: '0',
-      cardImage: '',
-      cardRare: 'normal',
-      cardTrunfo: false,
-    };
-  }
-
-  defaultFilter() {
-    return {
-      filterName: '',
-      filterRare: 'todas',
-      filterTrunfo: false,
-    };
-  }
-
   render() {
     const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      filterName,
-      filterRare,
-      filterTrunfo,
+      cards,
       gameScreen,
       shuffledCards,
       currentCard,
@@ -177,25 +70,9 @@ class App extends React.Component {
 
     const editComponent = (
       <Edit
-        cardName={ cardName }
-        cardDescription={ cardDescription }
-        cardAttr1={ cardAttr1 }
-        cardAttr2={ cardAttr2 }
-        cardAttr3={ cardAttr3 }
-        cardImage={ cardImage }
-        cardRare={ cardRare }
-        cardTrunfo={ cardTrunfo }
-        hasTrunfo={ this.hasTrunfo() }
-        hasError={ this.hasError() }
-        onInputChange={ this.handleFields }
-        onSaveButtonClick={ this.saveCard }
-        onFilterChange={ this.handleFields }
-        filterName={ filterName }
-        filterRare={ filterRare }
-        filterTrunfo={ filterTrunfo }
-        onCleanButtonClick={ this.cleanFilter }
-        cards={ this.filterCards() }
-        onDeleteButtonClick={ this.deleteCard }
+        cards={ cards }
+        addCard={ this.addCard }
+        deleteCard={ this.deleteCard }
       />
     );
 

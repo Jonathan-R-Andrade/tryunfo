@@ -7,13 +7,38 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
+    this.state = this.getStateInLocalStorage();
+  }
+
+  checkStateInLocalStorage = (state) => {
+    if (!state || typeof state !== 'object') return false;
+    const totalKeysToCheck = 5;
+    if (Object.keys(state).length !== totalKeysToCheck) return false;
+    const { cards, shuffledCards, currentCard, hasCardsChange, gameScreen } = state;
+    if (!Array.isArray(cards)) return false;
+    if (!Array.isArray(shuffledCards)) return false;
+    if (typeof currentCard !== 'number') return false;
+    if (typeof hasCardsChange !== 'boolean') return false;
+    if (typeof gameScreen !== 'boolean') return false;
+    return true;
+  }
+
+  getStateInLocalStorage = () => {
+    const state = JSON.parse(localStorage.getItem('Tryunfo-state'));
+    if (this.checkStateInLocalStorage(state)) {
+      return state;
+    }
+    return {
       cards: [],
-      gameScreen: false,
       shuffledCards: [],
       currentCard: -1,
       hasCardsChange: false,
+      gameScreen: false,
     };
+  }
+
+  updateStateInLocalStorage = () => {
+    localStorage.setItem('Tryunfo-state', JSON.stringify(this.state));
   }
 
   shuffleCards = () => {
@@ -26,14 +51,14 @@ class App extends React.Component {
       shuffledCards,
       currentCard: -1,
       hasCardsChange: false,
-    });
+    }, this.updateStateInLocalStorage);
   }
 
   nextCard = () => {
     this.setState((state) => {
       const { currentCard } = state;
       return { currentCard: currentCard + 1 };
-    });
+    }, this.updateStateInLocalStorage);
   }
 
   toggleScreen = (gameScreen) => {
@@ -41,7 +66,7 @@ class App extends React.Component {
     if (gameScreen && hasCardsChange) {
       this.shuffleCards();
     }
-    this.setState({ gameScreen });
+    this.setState({ gameScreen }, this.updateStateInLocalStorage);
   }
 
   addCard = (card) => {
@@ -49,7 +74,7 @@ class App extends React.Component {
     this.setState({
       cards: [...cards, card],
       hasCardsChange: true,
-    });
+    }, this.updateStateInLocalStorage);
   }
 
   deleteCard = (cardName) => {
@@ -57,7 +82,7 @@ class App extends React.Component {
     this.setState({
       cards: cards.filter((card) => card.cardName !== cardName),
       hasCardsChange: true,
-    });
+    }, this.updateStateInLocalStorage);
   }
 
   render() {

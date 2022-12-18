@@ -5,6 +5,12 @@
   "engines": {
     "node": "16"
   },
+  "homepage": "https://jonathan-r-andrade.github.io/tryunfo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathan-r-andrade/tryunfo.git"
+  },
+  "author": "Jonathan R. Andrade",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
